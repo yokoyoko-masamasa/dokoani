@@ -35,4 +35,13 @@ return [
         ],
     ],
 
+    'tmdb' => [
+        'api_token' => env('TMDB_API_TOKEN'),
+        'base_url' => env('TMDB_BASE_URL'),
+        'image_base_url' => env('TMDB_IMAGE_BASE_URL'),
+        'provider_aliases' => [
+            10 => 9,
+        ],
+    ],
+
 ];
