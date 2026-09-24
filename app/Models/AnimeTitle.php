@@ -10,6 +10,16 @@ class AnimeTitle extends Model
 {
     use HasFactory;
 
+    // 一括代入（create）を許可する列
+    protected $fillable = [
+        'tmdb_id',
+        'title',
+        'synopsis',
+        'poster_image_url',
+        'popularity',
+        'last_synced_at',
+    ];
+    
     // この作品の配信状況を複数持つ
     public function availabilities(): HasMany
     {

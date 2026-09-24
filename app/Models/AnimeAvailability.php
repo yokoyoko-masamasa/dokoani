@@ -10,6 +10,13 @@ class AnimeAvailability extends Model
 {
     use HasFactory;
 
+    // 一括代入（create）を許可する列
+    protected $fillable = [
+        'anime_title_id',
+        'streaming_service_id',
+        'availability_status',
+    ];
+
     // この配信状況は1つの作品に属する
     public function animeTitle(): BelongsTo
     {
