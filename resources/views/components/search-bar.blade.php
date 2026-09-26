@@ -1,5 +1,4 @@
-{{-- 仮の URL（検索）。ルート追加後に route('search.index') へ置き換える --}}
-<form method="GET" action="{{ url('/search') }}" class="flex gap-2">
+<form method="GET" action="{{ route('search.index') }}" class="flex gap-2">
     <input
         type="text"
         name="q"
