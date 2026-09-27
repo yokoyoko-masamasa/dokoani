@@ -40,7 +40,8 @@ return [
         'base_url' => env('TMDB_BASE_URL'),
         'image_base_url' => env('TMDB_IMAGE_BASE_URL'),
         'provider_aliases' => [
-            10 => 9,
+            10 => 9,      // Amazon Video → Amazon Prime Video
+            1796 => 8,    // Netflix Standard with Ads → Netflix
         ],
     ],
 
