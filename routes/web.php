@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnimeTitleController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
@@ -10,6 +11,12 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // 検索結果一覧。q が空ならトップへ戻し、あれば部分一致で20件ずつ表示する
 Route::get('/search', [SearchController::class, 'index'])->name('search.index');
+
+// 検索候補。JSONで最大5件返す。読み取りのみなのでCSRFトークン不要
+Route::get('/search/suggest', [SearchController::class, 'suggest'])->name('search.suggest');
+
+// アニメ詳細画面（仮表示）
+Route::get('/anime/{animeTitle}', [AnimeTitleController::class, 'show'])->name('anime.show');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
