@@ -13,7 +13,8 @@
                 <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
             @endif
 
-            <div>
+            {{-- クリックでアニメ詳細画面（anime.show）へ遷移する --}}
+            <a href="{{ route('anime.show', ['animeTitle' => $anime]) }}" class="block">
                 {{-- ポスター画像が無い作品は、灰色の枠で代用する --}}
                 @if ($anime->poster_image_url)
                     <img src="{{ $anime->poster_image_url }}" alt="{{ $anime->title }}" class="w-full aspect-[2/3] object-cover rounded-md bg-gray-200">
@@ -32,7 +33,7 @@
                         <span class="text-xs text-gray-500">配信サービスなし</span>
                     @endforelse
                 </div>
-            </div>
+            </a>
 
             @if ($loop->last)
                 </div>
