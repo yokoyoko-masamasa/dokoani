@@ -6,6 +6,8 @@ if (input && list) {
     const suggestUrl = input.dataset.suggestUrl;
     const showUrlTemplate = input.dataset.showUrl;
     let debounceTimer = null;
+    // IME（日本語入力）で変換中かどうかのフラグ
+    let isComposing = false;
 
     // ドロップダウンを閉じて中身を空にする
     const closeList = () => {
@@ -37,7 +39,8 @@ if (input && list) {
         list.classList.remove('hidden');
     };
 
-    input.addEventListener('input', () => {
+    // 入力値をもとに、デバウンスしてから候補を取得する
+    const scheduleSuggest = () => {
         const q = input.value.trim();
 
         clearTimeout(debounceTimer);
@@ -55,6 +58,26 @@ if (input && list) {
                 .then(renderList)
                 .catch(closeList);
         }, 250);
+    };
+
+    // 変換開始時はフラグを立てて、変換中の候補取得を止める
+    input.addEventListener('compositionstart', () => {
+        isComposing = true;
+    });
+
+    // 変換確定時にフラグを戻し、確定後の文字列で1回だけ候補取得する
+    input.addEventListener('compositionend', () => {
+        isComposing = false;
+        scheduleSuggest();
+    });
+
+    input.addEventListener('input', () => {
+        // 変換中の中間文字列は候補取得の対象にしない
+        if (isComposing) {
+            return;
+        }
+
+        scheduleSuggest();
     });
 
     // 入力欄・候補の外をクリックしたら候補を閉じる
