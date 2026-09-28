@@ -7,7 +7,7 @@
     <section class="px-4 md:px-6 pb-8">
         <h1 class="text-lg font-bold text-gray-800">{{ $animeTitle->title }}</h1>
 
-        <div class="mt-4 flex flex-col md:flex-row gap-6">
+        <div class="mt-4">
             {{-- ポスター画像が無い作品は「No Image」と表示する --}}
             @if ($animeTitle->poster_image_url)
                 <img src="{{ $animeTitle->poster_image_url }}" alt="{{ $animeTitle->title }}" class="w-48 aspect-[2/3] object-cover rounded-md bg-gray-200">
@@ -16,15 +16,39 @@
                     No Image
                 </div>
             @endif
-
-            <div>
-                {{-- あらすじが無い作品は文言で代用する --}}
-                @if ($animeTitle->synopsis)
-                    <p class="text-sm text-gray-800">{{ $animeTitle->synopsis }}</p>
-                @else
-                    <p class="text-sm text-gray-500">あらすじ情報がありません</p>
-                @endif
-            </div>
         </div>
+    </section>
+
+    <section class="px-4 md:px-6 pb-8">
+        <h2 class="text-base font-bold text-gray-800">配信サービス</h2>
+
+        {{-- 配信サービスが1件も無い場合はメッセージだけ表示する --}}
+        @if ($logos->isEmpty())
+            <p class="mt-2 text-sm text-gray-500">配信サービスなし</p>
+        @else
+            <div class="mt-2 flex flex-wrap gap-4">
+                @foreach ($logos as $logo)
+                    {{-- 別タブで開く。target="_blank"には安全対策としてrel属性を必ず付ける --}}
+                    <a href="{{ $logo['service']->service_url }}" target="_blank" rel="noopener noreferrer">
+                        <img
+                            src="{{ $logo['service']->logo_image_url }}"
+                            alt="{{ $logo['service']->name }}"
+                            class="w-16 h-16 object-contain rounded border-4 {{ $logo['border_class'] }}"
+                        >
+                    </a>
+                @endforeach
+            </div>
+        @endif
+    </section>
+
+    <section class="px-4 md:px-6 pb-8">
+        <h2 class="text-base font-bold text-gray-800">あらすじ</h2>
+
+        {{-- あらすじが無い作品は文言で代用する --}}
+        @if ($animeTitle->synopsis)
+            <p class="mt-2 text-sm text-gray-800">{{ $animeTitle->synopsis }}</p>
+        @else
+            <p class="mt-2 text-sm text-gray-500">あらすじ情報がありません</p>
+        @endif
     </section>
 </x-app-layout>
