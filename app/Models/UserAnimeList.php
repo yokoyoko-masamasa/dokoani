@@ -11,6 +11,14 @@ class UserAnimeList extends Model
 {
     use HasFactory;
 
+    // 一括代入（create）を許可する列
+    protected $fillable = [
+        'user_id',
+        'anime_title_id',
+        'status',
+        'priority',
+    ];
+
     // このリスト行は1人のユーザーに属する
     public function user(): BelongsTo
     {

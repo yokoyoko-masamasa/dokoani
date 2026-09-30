@@ -4,6 +4,7 @@ use App\Http\Controllers\AnimeTitleController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\UserAnimeListController;
 use Illuminate\Support\Facades\Route;
 
 // トップ画面。人気アニメ6件と使い方を表示する
@@ -21,6 +22,12 @@ Route::get('/anime/{animeTitle}', [AnimeTitleController::class, 'show'])->name('
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+// メール未認証のユーザーはverifiedで弾く
+Route::middleware(['auth', 'verified'])->prefix('mypage')->group(function () {
+    // 見たい/視聴済みの切り替えPUT（状態と行の有無で処理を分ける）
+    Route::put('/list/{animeTitle}', [UserAnimeListController::class, 'update'])->name('list.update');
 });
 
 require __DIR__.'/auth.php';
