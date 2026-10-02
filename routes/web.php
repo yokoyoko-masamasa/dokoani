@@ -28,6 +28,8 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'verified'])->prefix('mypage')->group(function () {
     // 見たい/視聴済みの切り替えPUT（状態と行の有無で処理を分ける）
     Route::put('/list/{animeTitle}', [UserAnimeListController::class, 'update'])->name('list.update');
+    // 見たい/視聴済みの行を削除するDELETE（行が無くても何もしない）
+    Route::delete('/list/{animeTitle}', [UserAnimeListController::class, 'destroy'])->name('list.destroy');
 });
 
 require __DIR__.'/auth.php';

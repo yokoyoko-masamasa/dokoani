@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateUserAnimeListRequest;
 use App\Models\AnimeTitle;
 use App\Models\UserAnimeList;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 
 class UserAnimeListController extends Controller
 {
@@ -41,6 +42,16 @@ class UserAnimeListController extends Controller
             ['user_id' => $user->id, 'anime_title_id' => $animeTitle->id],
             ['status' => $status, 'priority' => $priority]
         );
+
+        return back();
+    }
+
+    public function destroy(Request $request, AnimeTitle $animeTitle): RedirectResponse
+    {
+        // 自分の行だけを消す。行が無くても0件削除で終わり、何度送っても同じ
+        UserAnimeList::where('user_id', $request->user()->id)
+            ->where('anime_title_id', $animeTitle->id)
+            ->delete();
 
         return back();
     }
