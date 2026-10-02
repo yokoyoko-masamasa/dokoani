@@ -51,9 +51,17 @@ class AnimeTitleController extends Controller
             })
             ->values(); // グループ化で付いたキー(サービスID)を消し、0,1,2...の連番に戻す
 
+        // この作品に対する自分のリスト状態（want/watched）。行なし・未ログインはnull
+        $listStatus = $request->user()
+            ?->userAnimeLists()
+            ->where('anime_title_id', $animeTitle->id)
+            ->first()
+            ?->status;
+
         return view('anime.show', [
             'animeTitle' => $animeTitle,
             'logos'      => $logos,
+            'listStatus' => $listStatus,
         ]);
     }
 }
