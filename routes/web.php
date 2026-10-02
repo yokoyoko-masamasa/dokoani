@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AnimeTitleController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Mypage\WantListController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\UserAnimeListController;
@@ -26,6 +27,8 @@ Route::middleware('auth')->group(function () {
 
 // メール未認証のユーザーはverifiedで弾く
 Route::middleware(['auth', 'verified'])->prefix('mypage')->group(function () {
+    // 見たいリスト画面。自分のwantだけを優先度順に表示する
+    Route::get('/want', [WantListController::class, 'index'])->name('mypage.want');
     // 見たい/視聴済みの切り替えPUT（状態と行の有無で処理を分ける）
     Route::put('/list/{animeTitle}', [UserAnimeListController::class, 'update'])->name('list.update');
     // 見たい/視聴済みの行を削除するDELETE（行が無くても何もしない）

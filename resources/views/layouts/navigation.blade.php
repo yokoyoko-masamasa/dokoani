@@ -5,8 +5,7 @@
         <div class="flex items-center gap-4 text-sm whitespace-nowrap">
             {{-- ログイン中かどうかで、右側のリンクを切り替える --}}
             @auth
-                {{-- 仮の URL。ルートができたら route() に置き換える --}}
-                <a href="{{ url('/mypage/want') }}" class="text-gray-700 hover:text-gray-900">マイページ</a>
+                <a href="{{ route('mypage.want') }}" class="text-gray-700 hover:text-gray-900">マイページ</a>
 
                 {{-- ログアウトは POST で送る。@csrf は不正な送信を防ぐ合言葉 --}}
                 <form method="POST" action="{{ route('logout') }}">
