@@ -26,16 +26,8 @@
                 <div class="flex-1">
                     <a href="{{ route('anime.show', $anime) }}" class="text-sm font-bold text-gray-800">{{ $anime->title }}</a>
 
-                    {{-- 同じサービスのロゴは1つにまとめる（flatrate と rent の重複対策） --}}
-                    @php($logos = $anime->availabilities->unique('streaming_service_id'))
-                    <div class="mt-2 flex flex-wrap gap-1">
-                        {{-- 配信が無ければ1行だけ出し、あればロゴを並べる --}}
-                        @forelse ($logos as $availability)
-                            <img src="{{ $availability->streamingService->logo_image_url }}" alt="{{ $availability->streamingService->name }}" class="w-8 h-8 rounded">
-                        @empty
-                            <span class="text-xs text-gray-500">配信サービスなし</span>
-                        @endforelse
-                    </div>
+                    {{-- 配信ロゴ共通コンポーネントを読み込む --}}
+                    <x-availability-logos :anime="$anime" />
 
                     <div class="mt-3 flex gap-2">
                         {{-- 視聴済みへ変更するPUT。@csrf は不正な送信を防ぐ合言葉 --}}
