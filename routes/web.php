@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AnimeTitleController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Mypage\CoverageController;
 use App\Http\Controllers\Mypage\WantListController;
 use App\Http\Controllers\Mypage\WatchedListController;
 use App\Http\Controllers\ProfileController;
@@ -32,6 +33,8 @@ Route::middleware(['auth', 'verified'])->prefix('mypage')->group(function () {
     Route::get('/want', [WantListController::class, 'index'])->name('mypage.want');
     // 視聴済みリスト画面。自分のwatchedだけを更新の新しい順に表示する
     Route::get('/watched', [WatchedListController::class, 'index'])->name('mypage.watched');
+    // 契約状況画面。契約中サービスごとの料金と視聴可能本数を表示する
+    Route::get('/subscriptions', [CoverageController::class, 'index'])->name('mypage.subscriptions');
     // 見たい/視聴済みの切り替えPUT（状態と行の有無で処理を分ける）
     Route::put('/list/{animeTitle}', [UserAnimeListController::class, 'update'])->name('list.update');
     // 見たい/視聴済みの行を削除するDELETE（行が無くても何もしない）
