@@ -4,6 +4,9 @@
         <x-search-bar />
     </div>
 
+    {{-- マイページのタブ共通コンポーネントを読み込む --}}
+    <x-mypage-tabs />
+
     <section class="px-4 md:px-6 pb-8">
         <h1 class="mb-4 text-lg font-bold text-gray-800">見たいリスト</h1>
 
