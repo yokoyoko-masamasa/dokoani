@@ -31,6 +31,28 @@ class CoverageController extends Controller
 
         $services = DB::select($sql, [$request->user()->id]);
 
-        return view('mypage.subscriptions', ['services' => $services]);
+        // 契約中のどれにも見放題が無い、見たい作品を数える
+        $sqlUnwatchable = <<<'SQL'
+            SELECT COUNT(*)
+              FROM user_anime_lists ual
+             WHERE ual.user_id = ?
+               AND ual.status = 'want'
+               AND NOT EXISTS (
+                   SELECT 1
+                     FROM anime_availabilities aa
+                     JOIN user_subscriptions us
+                       ON us.streaming_service_id = aa.streaming_service_id
+                      AND us.user_id = ual.user_id
+                    WHERE aa.anime_title_id = ual.anime_title_id
+                      AND aa.availability_status = 'flatrate'
+               )
+            SQL;
+
+        $unwatchableCount = DB::scalar($sqlUnwatchable, [$request->user()->id]);
+
+        return view('mypage.subscriptions', [
+            'services' => $services,
+            'unwatchableCount' => $unwatchableCount,
+        ]);
     }
 }

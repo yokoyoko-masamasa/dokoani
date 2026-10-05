@@ -25,5 +25,8 @@
         @empty
             <p class="text-gray-800">契約中のサービスがありません</p>
         @endforelse
+        
+        {{-- 契約中のどれでも見放題でない、見たい作品の本数 --}}
+        <p class="mt-4 text-sm text-gray-800">どのサブスクでも見られない作品：{{ $unwatchableCount }}本</p>
     </section>
 </x-app-layout>

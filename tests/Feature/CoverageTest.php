@@ -46,9 +46,9 @@ class CoverageTest extends TestCase
         $this->assertCount(3, $rows);
         $this->assertSame(2, $rows[$services[0]->id]->watchable_count);
 
-        // 契約が3件でも、配信テーブルを読むSQLは1本だけ
+        // 契約3件でも、SQLは見られる数と見られない数の計2本
         $reads = $queries->filter(fn ($q) => str_contains($q['query'], 'anime_availabilities'));
-        $this->assertCount(1, $reads);
+        $this->assertCount(2, $reads);
     }
 
     public function test_service_with_zero_watchable_titles_is_still_listed(): void
@@ -92,5 +92,28 @@ class CoverageTest extends TestCase
         // rent だけの作品は見放題ではないので数えない
         $rows = collect($response->viewData('services'))->keyBy('id');
         $this->assertSame(0, $rows[$service->id]->watchable_count);
+    }
+
+    public function test_all_want_titles_are_counted_when_no_subscriptions(): void
+    {
+        $user = User::factory()->create();
+
+        // 契約は作らない。配信だけある未契約のサービスを用意する
+        $service = StreamingService::factory()->create();
+
+        $animes = AnimeTitle::factory()->count(2)->create();
+        foreach ($animes as $anime) {
+            UserAnimeList::factory()->for($user)->for($anime)->create([
+                'status' => 'want',
+            ]);
+            AnimeAvailability::factory()->for($anime)->for($service)->create([
+                'availability_status' => 'flatrate',
+            ]);
+        }
+
+        $response = $this->actingAs($user)->get(route('mypage.subscriptions'));
+
+        // 契約0件なら、見たいの全件が見られない作品になる
+        $this->assertSame(2, $response->viewData('unwatchableCount'));
     }
 }
