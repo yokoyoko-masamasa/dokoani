@@ -9,6 +9,7 @@ use App\Http\Controllers\Mypage\WatchedListController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\UserAnimeListController;
+use App\Http\Controllers\UserSubscriptionController;
 use Illuminate\Support\Facades\Route;
 
 // トップ画面。人気アニメ6件と使い方を表示する
@@ -38,6 +39,10 @@ Route::middleware(['auth', 'verified'])->prefix('mypage')->group(function () {
     Route::get('/subscriptions', [CoverageController::class, 'index'])->name('mypage.subscriptions');
     // 設定画面。契約中サブスクの一覧と、追加・料金変更・削除への入口を表示する
     Route::get('/settings', [SettingController::class, 'index'])->name('mypage.settings');
+    // サブスク追加フォームを表示する。未契約のサービスだけを選べる
+    Route::get('/settings/subscriptions/create', [UserSubscriptionController::class, 'create'])->name('subscriptions.create');
+    // サブスクを1件保存する。保存後は設定画面へ戻る
+    Route::post('/settings/subscriptions', [UserSubscriptionController::class, 'store'])->name('subscriptions.store');
     // 見たい/視聴済みの切り替えPUT（状態と行の有無で処理を分ける）
     Route::put('/list/{animeTitle}', [UserAnimeListController::class, 'update'])->name('list.update');
     // 見たい/視聴済みの行を削除するDELETE（行が無くても何もしない）

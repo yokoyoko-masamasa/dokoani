@@ -34,8 +34,8 @@
             <p class="text-gray-800">契約中のサービスがありません</p>
         @endforelse
 
-        {{-- サービス追加画面へのリンク（仮の URL） --}}
-        <a href="{{ url('/mypage/settings/subscriptions/create') }}" class="mt-4 block px-3 py-2 rounded-md text-center text-sm bg-white text-gray-800 border border-gray-300">＋ サービスを追加</a>
+        {{-- サービス追加画面へのリンク --}}
+        <a href="{{ route('subscriptions.create') }}" class="mt-4 block px-3 py-2 rounded-md text-center text-sm bg-white text-gray-800 border border-gray-300">＋ サービスを追加</a>
 
         <h2 class="mt-8 mb-4 text-lg font-bold text-gray-800">アカウント設定</h2>
 

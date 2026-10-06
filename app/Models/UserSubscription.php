@@ -10,6 +10,13 @@ class UserSubscription extends Model
 {
     use HasFactory;
 
+    // 一括代入（create）を許可する列
+    protected $fillable = [
+        'user_id',
+        'streaming_service_id',
+        'price',
+    ];
+
     // この契約情報は1人のユーザーに属する
     public function user(): BelongsTo
     {
