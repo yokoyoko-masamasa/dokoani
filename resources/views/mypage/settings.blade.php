@@ -19,11 +19,11 @@
                 </div>
 
                 <div class="flex gap-2">
-                    {{-- 料金変更画面へのリンク（仮の URL） --}}
-                    <a href="{{ url('/mypage/settings/subscriptions/'.$sub->id.'/edit') }}" class="px-3 py-1 rounded-md text-sm bg-white text-gray-800 border border-gray-300">料金変更</a>
+                    {{-- 料金変更画面へのリンク --}}
+                    <a href="{{ route('subscriptions.edit', $sub) }}" class="px-3 py-1 rounded-md text-sm bg-white text-gray-800 border border-gray-300">料金変更</a>
 
-                    {{-- 契約を削除するDELETE（仮の URL） --}}
-                    <form method="POST" action="{{ url('/mypage/settings/subscriptions/'.$sub->id) }}">
+                    {{-- 契約を削除するDELETE --}}
+                    <form method="POST" action="{{ route('subscriptions.destroy', $sub) }}">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="px-3 py-1 rounded-md text-sm bg-white text-gray-800 border border-gray-300">削除</button>

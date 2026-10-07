@@ -43,6 +43,12 @@ Route::middleware(['auth', 'verified'])->prefix('mypage')->group(function () {
     Route::get('/settings/subscriptions/create', [UserSubscriptionController::class, 'create'])->name('subscriptions.create');
     // サブスクを1件保存する。保存後は設定画面へ戻る
     Route::post('/settings/subscriptions', [UserSubscriptionController::class, 'store'])->name('subscriptions.store');
+    // 料金変更フォームを表示する。自分の契約だけ開ける
+    Route::get('/settings/subscriptions/{userSubscription}/edit', [UserSubscriptionController::class, 'edit'])->name('subscriptions.edit')->middleware('can:update,userSubscription');
+    // 月額料金を更新する。更新後は設定画面へ戻る
+    Route::patch('/settings/subscriptions/{userSubscription}', [UserSubscriptionController::class, 'update'])->name('subscriptions.update')->middleware('can:update,userSubscription');
+    // 契約を1件削除する。削除後は設定画面へ戻る
+    Route::delete('/settings/subscriptions/{userSubscription}', [UserSubscriptionController::class, 'destroy'])->name('subscriptions.destroy')->middleware('can:delete,userSubscription');
     // 見たい/視聴済みの切り替えPUT（状態と行の有無で処理を分ける）
     Route::put('/list/{animeTitle}', [UserAnimeListController::class, 'update'])->name('list.update');
     // 見たい/視聴済みの行を削除するDELETE（行が無くても何もしない）
