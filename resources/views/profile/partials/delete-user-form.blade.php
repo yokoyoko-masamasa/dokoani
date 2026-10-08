@@ -1,55 +1,50 @@
-<section class="space-y-6">
-    <header>
-        <h2 class="text-lg font-medium text-gray-900">
-            {{ __('Delete Account') }}
-        </h2>
+<div>
+    <h1 class="mt-4 mb-2 text-lg font-bold text-gray-800">アカウントの削除（退会）</h1>
 
-        <p class="mt-1 text-sm text-gray-600">
-            {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.') }}
-        </p>
-    </header>
+    <p class="text-sm text-gray-800">退会すると、以下のデータがすべて削除され、元に戻すことはできません。</p>
 
-    <x-danger-button
+    <ul class="mt-2 list-disc ps-5 text-sm text-gray-800">
+        <li>見たいリスト</li>
+        <li>視聴済みリスト</li>
+        <li>マイサブスク登録情報</li>
+    </ul>
+
+    <button
+        type="button"
         x-data=""
         x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')"
-    >{{ __('Delete Account') }}</x-danger-button>
+        class="mt-6 block w-full px-3 py-2 rounded-md text-center text-sm bg-white text-gray-800 border border-gray-300"
+    >退会する</button>
 
     <x-modal name="confirm-user-deletion" :show="$errors->userDeletion->isNotEmpty()" focusable>
         <form method="post" action="{{ route('profile.destroy') }}" class="p-6">
             @csrf
             @method('delete')
 
-            <h2 class="text-lg font-medium text-gray-900">
-                {{ __('Are you sure you want to delete your account?') }}
-            </h2>
+            <h2 class="text-lg font-bold text-gray-800">本当に退会しますか？</h2>
 
-            <p class="mt-1 text-sm text-gray-600">
-                {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.') }}
-            </p>
+            <p class="mt-1 text-sm text-gray-800">パスワードを入力して、退会を確定してください。</p>
 
             <div class="mt-6">
-                <x-input-label for="password" value="{{ __('Password') }}" class="sr-only" />
+                {{-- ラベル・入力欄・エラー表示の部品を読み込む --}}
+                <x-input-label for="password" value="パスワード" class="sr-only" />
 
                 <x-text-input
                     id="password"
                     name="password"
                     type="password"
                     class="mt-1 block w-3/4"
-                    placeholder="{{ __('Password') }}"
+                    placeholder="パスワード"
                 />
 
                 <x-input-error :messages="$errors->userDeletion->get('password')" class="mt-2" />
             </div>
 
             <div class="mt-6 flex justify-end">
-                <x-secondary-button x-on:click="$dispatch('close')">
-                    {{ __('Cancel') }}
-                </x-secondary-button>
+                <button type="button" x-on:click="$dispatch('close')" class="px-3 py-2 rounded-md text-center text-sm bg-white text-gray-800 border border-gray-300">キャンセル</button>
 
-                <x-danger-button class="ms-3">
-                    {{ __('Delete Account') }}
-                </x-danger-button>
+                <button type="submit" class="ms-3 px-3 py-2 rounded-md text-center text-sm bg-white text-gray-800 border border-gray-300">退会する</button>
             </div>
         </form>
     </x-modal>
-</section>
+</div>
