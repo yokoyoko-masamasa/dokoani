@@ -23,10 +23,10 @@
                     <a href="{{ route('subscriptions.edit', $sub) }}" class="px-3 py-1 rounded-md text-sm bg-white text-gray-800 border border-gray-300">料金変更</a>
 
                     {{-- 契約を削除するDELETE --}}
-                    <form method="POST" action="{{ route('subscriptions.destroy', $sub) }}">
+                    <form method="POST" action="{{ route('subscriptions.destroy', $sub) }}" onsubmit="return confirm('このサブスクの登録を削除しますか？')">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="px-3 py-1 rounded-md text-sm bg-white text-gray-800 border border-gray-300">削除</button>
+                        <button type="submit" class="px-3 py-1 rounded-md text-sm bg-white text-red-600 border border-red-300">削除</button>
                     </form>
                 </div>
             </div>

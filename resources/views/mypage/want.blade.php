@@ -42,10 +42,10 @@
                         </form>
 
                         {{-- リストから外すDELETE --}}
-                        <form method="POST" action="{{ route('list.destroy', $anime) }}">
+                        <form method="POST" action="{{ route('list.destroy', $anime) }}" onsubmit="return confirm('この作品を見たいリストから削除しますか？')">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="px-3 py-1 rounded-md text-sm bg-white text-gray-800 border border-gray-300">削除</button>
+                            <button type="submit" class="px-3 py-1 rounded-md text-sm bg-white text-red-600 border border-red-300">削除</button>
                         </form>
                     </div>
                 </div>
