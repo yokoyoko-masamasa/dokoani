@@ -20,13 +20,6 @@ class UpdateUserSubscriptionRequest extends FormRequest
         ];
     }
 
-    public function attributes(): array
-    {
-        return [
-            'price' => '月額料金',
-        ];
-    }
-
     public function messages(): array
     {
         return [

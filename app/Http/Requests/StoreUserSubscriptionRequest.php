@@ -28,14 +28,6 @@ class StoreUserSubscriptionRequest extends FormRequest
         ];
     }
 
-    public function attributes(): array
-    {
-        return [
-            'streaming_service_id' => 'サービス',
-            'price' => '月額料金',
-        ];
-    }
-
     public function messages(): array
     {
         return [
