@@ -11,9 +11,9 @@ class AnimeTitleController extends Controller
     // 色名(green/orange/gray) → 完成したTailwindクラス名の対応表
     // Blade側で組み立てず、ここで完成した文字列にしておく
     private const BORDER_CLASSES = [
-        'green'  => 'border-green-500',
+        'green' => 'border-green-500',
         'orange' => 'border-orange-500',
-        'gray'   => 'border-gray-300',
+        'gray' => 'border-gray-300',
     ];
 
     public function show(Request $request, AnimeTitle $animeTitle): View
@@ -45,7 +45,7 @@ class AnimeTitleController extends Controller
                             : 'gray'));
 
                 return [
-                    'service'      => $service,
+                    'service' => $service,
                     'border_class' => self::BORDER_CLASSES[$color],
                 ];
             })
@@ -60,7 +60,7 @@ class AnimeTitleController extends Controller
 
         return view('anime.show', [
             'animeTitle' => $animeTitle,
-            'logos'      => $logos,
+            'logos' => $logos,
             'listStatus' => $listStatus,
         ]);
     }

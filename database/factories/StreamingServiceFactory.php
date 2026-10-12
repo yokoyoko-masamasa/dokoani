@@ -2,10 +2,11 @@
 
 namespace Database\Factories;
 
+use App\Models\StreamingService;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<\App\Models\StreamingService>
+ * @extends Factory<StreamingService>
  */
 class StreamingServiceFactory extends Factory
 {

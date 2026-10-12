@@ -4,10 +4,11 @@ namespace Database\Factories;
 
 use App\Models\StreamingService;
 use App\Models\User;
+use App\Models\UserSubscription;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<\App\Models\UserSubscription>
+ * @extends Factory<UserSubscription>
  */
 class UserSubscriptionFactory extends Factory
 {

@@ -5,10 +5,11 @@ namespace Database\Factories;
 use App\Enums\ListStatus;
 use App\Models\AnimeTitle;
 use App\Models\User;
+use App\Models\UserAnimeList;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<\App\Models\UserAnimeList>
+ * @extends Factory<UserAnimeList>
  */
 class UserAnimeListFactory extends Factory
 {

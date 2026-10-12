@@ -2,12 +2,13 @@
 
 namespace Database\Factories;
 
+use App\Models\AnimeAvailability;
 use App\Models\AnimeTitle;
 use App\Models\StreamingService;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<\App\Models\AnimeAvailability>
+ * @extends Factory<AnimeAvailability>
  */
 class AnimeAvailabilityFactory extends Factory
 {

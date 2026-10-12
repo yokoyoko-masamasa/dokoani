@@ -2,10 +2,11 @@
 
 namespace Database\Factories;
 
+use App\Models\AnimeTitle;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<\App\Models\AnimeTitle>
+ * @extends Factory<AnimeTitle>
  */
 class AnimeTitleFactory extends Factory
 {

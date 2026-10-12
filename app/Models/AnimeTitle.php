@@ -20,7 +20,7 @@ class AnimeTitle extends Model
         'popularity',
         'last_synced_at',
     ];
-    
+
     // この作品の配信状況を複数持つ
     public function availabilities(): HasMany
     {
