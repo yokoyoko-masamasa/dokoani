@@ -1,15 +1,15 @@
 # docs/ 資料の索引
 
 ドコアニの設計資料を置くフォルダ。実装時に参照する資料は、すべてここから辿れる。
-最終更新: 2026-09-20
+最終更新: 2026-10-13
 
 ## 資料一覧
 
 | 資料 | ファイル | 原本（正） | 更新するとき |
 |---|---|---|---|
 | MVP 決定事項 | `docs/decisions.md` | このファイル | 範囲や方針を変えたら直す |
-| MVP開発機能一覧 | `docs/features.md` | Notion「MVP開発機能一覧」（URLはファイル冒頭に記載） | Notion の分類（A/B/C）を直したら、このファイルも直す |
-| 要件定義書 | `docs/requirements.md` | Googleドキュメント（URLはファイル冒頭に記載） | 原本を直したら、このファイルも同じ内容に直す |
+| MVP開発機能一覧 | `docs/features.md` | このファイル | 分類（A/B/C）を変えたら直す |
+| 要件定義書 | `docs/requirements.md` | このファイル | 仕様を変えたら直す |
 | DB設計（SQL） | `docs/db/schema_ver3.sql` | drawDB で作成した ER 図（PostgreSQL 用 SQL を書き出したもの） | ER図を直したら SQL を書き出し直し、バージョンを上げる |
 | ワイヤーフレーム目録 | `docs/wireframes/INDEX.md` | Figma | 画面を増減・変更したら目録を直す |
 | ワイヤーフレーム画像（任意） | `docs/wireframes/images/*.png` | Figma | 画面を変更したら書き出し直す |
@@ -25,8 +25,7 @@
 
 ## 読み込み方式（資料ごと）
 
-- **要件定義書・MVP開発機能一覧**: Markdown ファイルとして置く。Google ドキュメントや Notion の URL を渡す方式、および MCP 接続は使わない。
-- **ワイヤーフレーム**: 「目録（テキスト）＋画像（任意）」で置く。Figma MCP は常用しない。
+- **ワイヤーフレーム**: 「目録（テキスト）＋画像（任意）」で置く。
 - **DB設計**: SQL ファイルとして置く。`schema_ver3.sql` は drawDB が出力した内容のまま（1文字も変えていない）。
 - `ver2` の SQL は置かない。ver3 で `anime_id` → `anime_title_id` への改名と、`created_at` / `updated_at` 等の追加が入っており、ver2 は古い。
 
