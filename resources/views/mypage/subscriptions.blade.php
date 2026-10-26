@@ -7,8 +7,8 @@
     {{-- マイページのタブ共通コンポーネントを読み込む --}}
     <x-mypage-tabs />
 
-    <section class="px-4 md:px-6 pb-8">
-        <h1 class="mb-4 text-lg font-bold text-gray-800">契約状況</h1>
+    <section class="px-4 md:px-6 py-8">
+        <h1 class="mb-4 border-l-4 border-accent pl-3 text-lg font-bold text-gray-800">契約状況</h1>
 
         {{-- 契約中サービスを1行ずつ並べ、無ければ0件の文言を出す --}}
         @forelse ($services as $row)

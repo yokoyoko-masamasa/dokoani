@@ -13,7 +13,7 @@
     >
     <button
         type="submit"
-        class="px-4 py-2 rounded-md bg-gray-800 text-white hover:bg-gray-700"
+        class="px-4 py-2 rounded-md bg-purple-700 text-white hover:bg-purple-800"
     >
         検索
     </button>

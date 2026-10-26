@@ -7,7 +7,7 @@
     </div>
 
     <section class="px-4 md:px-6 pb-8">
-        <h2 class="mb-4 text-lg font-bold text-gray-800">人気のアニメ</h2>
+        <h2 class="mb-4 border-l-4 border-accent pl-3 text-lg font-bold text-gray-800">人気のアニメ</h2>
 
         {{-- 作品があればカードを並べ、無ければ文言だけ出す --}}
         @forelse ($popularTitles as $title)

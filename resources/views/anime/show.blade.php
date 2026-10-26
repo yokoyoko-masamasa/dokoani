@@ -69,13 +69,13 @@
     </section>
 
     <section class="px-4 md:px-6 pb-8">
-        <h2 class="text-base font-bold text-gray-800">配信サービス</h2>
+        <h2 class="border-l-4 border-accent pl-3 text-base font-bold text-gray-800">配信サービス</h2>
 
         {{-- 配信サービスが1件も無い場合はメッセージだけ表示する --}}
         @if ($logos->isEmpty())
             <p class="mt-2 text-sm text-gray-500">配信サービスなし</p>
         @else
-            <div class="mt-2 flex flex-wrap gap-4">
+            <div class="mt-3 flex flex-wrap gap-4">
                 @foreach ($logos as $logo)
                     {{-- 別タブで開く。target="_blank"には安全対策としてrel属性を必ず付ける --}}
                     <a href="{{ $logo['service']->service_url }}" target="_blank" rel="noopener noreferrer">
@@ -91,7 +91,7 @@
     </section>
 
     <section class="px-4 md:px-6 pb-8">
-        <h2 class="text-base font-bold text-gray-800">あらすじ</h2>
+        <h2 class="border-l-4 border-accent pl-3 text-base font-bold text-gray-800">あらすじ</h2>
 
         {{-- あらすじが無い作品は文言で代用する --}}
         @if ($animeTitle->synopsis)
