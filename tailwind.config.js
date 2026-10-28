@@ -13,7 +13,7 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                sans: ['"Noto Sans JP"', ...defaultTheme.fontFamily.sans],
             },
             colors: {
                 accent: '#C572E7',
