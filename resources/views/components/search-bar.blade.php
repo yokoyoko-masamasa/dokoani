@@ -13,8 +13,10 @@
     >
     <button
         type="submit"
-        class="px-4 py-2 rounded-md bg-purple-700 text-white hover:bg-purple-800"
+        class="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-purple-700 text-white hover:bg-purple-800"
     >
+        {{-- 虫めがねのアイコン。文字の左に置く --}}
+        <x-heroicon-o-magnifying-glass class="w-5 h-5 shrink-0" aria-hidden="true" />
         検索
     </button>
 

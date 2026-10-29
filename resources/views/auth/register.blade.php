@@ -45,6 +45,8 @@
             </a>
 
             <x-primary-button class="ms-4">
+                {{-- 会員登録のアイコン。ヘッダーの会員登録と同じ絵 --}}
+                <x-heroicon-o-user-plus class="w-4 h-4 shrink-0" aria-hidden="true" />
                 {{ __('Register') }}
             </x-primary-button>
         </div>

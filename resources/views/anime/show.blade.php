@@ -26,14 +26,22 @@
                         <form method="POST" action="{{ route('list.destroy', $animeTitle) }}">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="px-4 py-2 rounded-md text-sm {{ $wantClass }}">見たい</button>
+                            <button type="submit" class="inline-flex items-center gap-2 px-4 py-2 rounded-md text-sm {{ $wantClass }}">
+                                {{-- しおりのアイコン --}}
+                                <x-heroicon-o-bookmark class="w-5 h-5 shrink-0" aria-hidden="true" />
+                                見たい
+                            </button>
                         </form>
                     @else
                         <form method="POST" action="{{ route('list.update', $animeTitle) }}">
                             @csrf
                             @method('PUT')
                             <input type="hidden" name="status" value="want">
-                            <button type="submit" class="px-4 py-2 rounded-md text-sm {{ $wantClass }}">見たい</button>
+                            <button type="submit" class="inline-flex items-center gap-2 px-4 py-2 rounded-md text-sm {{ $wantClass }}">
+                                {{-- しおりのアイコン --}}
+                                <x-heroicon-o-bookmark class="w-5 h-5 shrink-0" aria-hidden="true" />
+                                見たい
+                            </button>
                         </form>
                     @endif
 
@@ -42,14 +50,22 @@
                         <form method="POST" action="{{ route('list.destroy', $animeTitle) }}">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="px-4 py-2 rounded-md text-sm {{ $watchedClass }}">視聴済み</button>
+                            <button type="submit" class="inline-flex items-center gap-2 px-4 py-2 rounded-md text-sm {{ $watchedClass }}">
+                                {{-- チェック丸のアイコン --}}
+                                <x-heroicon-o-check-circle class="w-5 h-5 shrink-0" aria-hidden="true" />
+                                視聴済み
+                            </button>
                         </form>
                     @else
                         <form method="POST" action="{{ route('list.update', $animeTitle) }}">
                             @csrf
                             @method('PUT')
                             <input type="hidden" name="status" value="watched">
-                            <button type="submit" class="px-4 py-2 rounded-md text-sm {{ $watchedClass }}">視聴済み</button>
+                            <button type="submit" class="inline-flex items-center gap-2 px-4 py-2 rounded-md text-sm {{ $watchedClass }}">
+                                {{-- チェック丸のアイコン --}}
+                                <x-heroicon-o-check-circle class="w-5 h-5 shrink-0" aria-hidden="true" />
+                                視聴済み
+                            </button>
                         </form>
                     @endif
                 </div>

@@ -34,6 +34,8 @@
 
         <div class="flex items-center justify-end mt-4">
             <x-primary-button class="ms-3">
+                {{-- ログインのアイコン。ヘッダーのログインと同じ絵 --}}
+                <x-heroicon-o-arrow-right-end-on-rectangle class="w-4 h-4 shrink-0" aria-hidden="true" />
                 {{ __('Log in') }}
             </x-primary-button>
         </div>
