@@ -5,7 +5,7 @@
     </div>
 
     <section class="px-4 md:px-6 pb-8">
-        <h1 class="text-lg font-bold text-gray-800">{{ $animeTitle->title }}</h1>
+        <h1 class="text-xl font-bold text-gray-800">{{ $animeTitle->title }}</h1>
 
         {{-- メール認証済みのログインユーザーだけにボタンを出す --}}
         @auth
@@ -85,7 +85,7 @@
     </section>
 
     <section class="px-4 md:px-6 pb-8">
-        <h2 class="border-l-4 border-accent pl-3 text-base font-bold text-gray-800">配信サービス</h2>
+        <h2 class="border-l-4 border-accent pl-3 text-lg font-bold text-gray-800">配信サービス</h2>
 
         {{-- 配信サービスが1件も無い場合はメッセージだけ表示する --}}
         @if ($logos->isEmpty())
@@ -107,7 +107,7 @@
     </section>
 
     <section class="px-4 md:px-6 pb-8">
-        <h2 class="border-l-4 border-accent pl-3 text-base font-bold text-gray-800">あらすじ</h2>
+        <h2 class="border-l-4 border-accent pl-3 text-lg font-bold text-gray-800">あらすじ</h2>
 
         {{-- あらすじが無い作品は文言で代用する --}}
         @if ($animeTitle->synopsis)

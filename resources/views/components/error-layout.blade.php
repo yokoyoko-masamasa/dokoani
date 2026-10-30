@@ -24,7 +24,7 @@
 
                 <main class="flex-1">
                     <section class="px-4 md:px-6 py-8">
-                        <h1 class="text-lg font-bold text-gray-800">{{ $title }}</h1>
+                        <h1 class="text-2xl font-bold text-gray-800">{{ $title }}</h1>
 
                         <p class="mt-2 text-sm text-gray-800">{{ $message }}</p>
 

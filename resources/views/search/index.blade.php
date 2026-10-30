@@ -5,7 +5,7 @@
     </div>
 
     <section class="px-4 md:px-6 pb-8">
-        <h1 class="mb-4 text-lg font-bold text-gray-800">検索結果 {{ $animeTitles->total() }}件</h1>
+        <h1 class="mb-4 text-2xl font-bold text-gray-800">検索結果 {{ $animeTitles->total() }}件</h1>
 
         {{-- 作品があればカードを並べ、無ければ0件の文言を出す --}}
         @forelse ($animeTitles as $anime)

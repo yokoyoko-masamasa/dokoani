@@ -1,5 +1,5 @@
 <div>
-    <h1 class="mt-4 mb-2 text-lg font-bold text-gray-800">アカウントの削除（退会）</h1>
+    <h1 class="mt-4 mb-2 text-2xl font-bold text-gray-800">アカウントの削除（退会）</h1>
 
     <p class="text-sm text-gray-800">退会すると、以下のデータがすべて削除され、元に戻すことはできません。</p>
 

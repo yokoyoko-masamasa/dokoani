@@ -3,7 +3,7 @@
         {{-- 設定画面へ戻るリンク --}}
         <a href="{{ route('mypage.settings') }}" class="text-sm text-gray-800">← 設定に戻る</a>
 
-        <h1 class="mt-4 mb-2 text-lg font-bold text-gray-800">{{ isset($userSubscription) ? '料金を変更' : 'サブスクを追加' }}</h1>
+        <h1 class="mt-4 mb-2 text-2xl font-bold text-gray-800">{{ isset($userSubscription) ? '料金を変更' : 'サブスクを追加' }}</h1>
 
         {{-- 選択肢が無ければ、フォームの代わりに案内を出す --}}
         @if (! isset($userSubscription) && $services->isEmpty())
