@@ -36,7 +36,7 @@
                     <div>
                         {{-- ラベルとエラー表示の部品を読み込む --}}
                         <x-input-label for="streaming_service_id" value="サービス" />
-                        <select id="streaming_service_id" name="streaming_service_id" class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                        <select id="streaming_service_id" name="streaming_service_id" class="block mt-1 w-full border-gray-300 focus:border-primary focus:ring-primary rounded-md shadow-sm">
                             <option value="">選択してください</option>
                             @foreach ($services as $service)
                                 {{-- 入力し直しのとき、前回の選択を残す --}}

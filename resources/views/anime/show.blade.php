@@ -11,12 +11,12 @@
         @auth
             @if (auth()->user()->hasVerifiedEmail())
                 @php
-                    // 追加済みなら黒、未追加なら白（枠線は同じ太さでそろえる）
+                    // 追加済みなら濃い青、未追加なら白（枠線は同じ太さでそろえる）
                     $wantClass = $listStatus === \App\Enums\ListStatus::Want
-                        ? 'bg-black text-white border border-black'
+                        ? 'bg-primary-dark text-white border border-primary-dark'
                         : 'bg-white text-gray-800 border border-gray-300';
                     $watchedClass = $listStatus === \App\Enums\ListStatus::Watched
-                        ? 'bg-black text-white border border-black'
+                        ? 'bg-primary-dark text-white border border-primary-dark'
                         : 'bg-white text-gray-800 border border-gray-300';
                 @endphp
 

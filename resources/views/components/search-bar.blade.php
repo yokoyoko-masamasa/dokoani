@@ -9,11 +9,11 @@
         {{-- JS側から候補取得先と詳細画面URLのひな形を読み取る --}}
         data-suggest-url="{{ route('search.suggest') }}"
         data-show-url="{{ route('anime.show', ['animeTitle' => '__ID__']) }}"
-        class="flex-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+        class="flex-1 rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary"
     >
     <button
         type="submit"
-        class="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-purple-700 text-white hover:bg-purple-800"
+        class="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-primary-dark text-white hover:brightness-90"
     >
         {{-- 虫めがねのアイコン。文字の左に置く --}}
         <x-heroicon-o-magnifying-glass class="w-5 h-5 shrink-0" aria-hidden="true" />

@@ -16,7 +16,12 @@ export default {
                 sans: ['"Noto Sans JP"', ...defaultTheme.fontFamily.sans],
             },
             colors: {
-                accent: '#C572E7',
+                accent: '#C970E4',
+                primary: {
+                    DEFAULT: '#5293FF',
+                    dark: '#336DCC',
+                },
+                secondary: '#BEC5FF',
             },
         },
     },
