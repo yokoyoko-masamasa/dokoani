@@ -21,7 +21,7 @@
             @csrf
             @method('delete')
 
-            <h2 class="border-l-4 border-accent pl-3 text-lg font-bold text-gray-800">本当に退会しますか？</h2>
+            <x-section-heading>本当に退会しますか？</x-section-heading>
 
             <p class="mt-1 text-sm text-gray-800">パスワードを入力して、退会を確定してください。</p>
 

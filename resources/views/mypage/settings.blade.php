@@ -37,7 +37,7 @@
         {{-- サービス追加画面へのリンク --}}
         <a href="{{ route('subscriptions.create') }}" class="mt-4 block px-3 py-2 rounded-md text-center text-sm bg-white text-gray-800 border border-gray-300">＋ サービスを追加</a>
 
-        <h2 class="mt-8 mb-4 border-l-4 border-accent pl-3 text-lg font-bold text-gray-800">アカウント設定</h2>
+        <x-section-heading class="mt-8 mb-4">アカウント設定</x-section-heading>
 
         {{-- 退会の入口。Breeze 標準のアカウント画面へ移動する --}}
         <a href="{{ route('profile.edit') }}" class="text-sm text-gray-800 underline">退会する</a>

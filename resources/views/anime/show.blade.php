@@ -85,7 +85,7 @@
     </section>
 
     <section class="px-4 md:px-6 pb-8">
-        <h2 class="border-l-4 border-accent pl-3 text-lg font-bold text-gray-800">配信サービス</h2>
+        <x-section-heading>配信サービス</x-section-heading>
 
         {{-- 配信サービスが1件も無い場合はメッセージだけ表示する --}}
         @if ($logos->isEmpty())
@@ -107,7 +107,7 @@
     </section>
 
     <section class="px-4 md:px-6 pb-8">
-        <h2 class="border-l-4 border-accent pl-3 text-lg font-bold text-gray-800">あらすじ</h2>
+        <x-section-heading>あらすじ</x-section-heading>
 
         {{-- あらすじが無い作品は文言で代用する --}}
         @if ($animeTitle->synopsis)

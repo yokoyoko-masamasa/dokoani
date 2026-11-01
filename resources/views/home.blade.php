@@ -7,7 +7,7 @@
     </div>
 
     <section class="px-4 md:px-6 pb-8">
-        <h2 class="mb-4 border-l-4 border-accent pl-3 text-lg font-bold text-gray-800">人気のアニメ</h2>
+        <x-section-heading class="mb-4">人気のアニメ</x-section-heading>
 
         {{-- 作品があればカードを並べ、無ければ文言だけ出す --}}
         @forelse ($popularTitles as $title)
@@ -34,7 +34,7 @@
     </section>
 
     <section class="px-4 md:px-6 pb-8">
-        <h2 class="mb-4 border-l-4 border-accent pl-3 text-lg font-bold text-gray-800">使い方</h2>
+        <x-section-heading class="mb-4">使い方</x-section-heading>
         <ol class="list-decimal list-inside space-y-2 text-gray-800">
             <li>アニメ名を検索する</li>
             <li>配信サービスと配信状況を確認する</li>
