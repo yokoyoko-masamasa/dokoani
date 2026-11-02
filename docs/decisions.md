@@ -42,6 +42,7 @@
 | 14 | 配色 | 色は HUE/360（配色ツール）で決めた。設定は Color Space=Munsell、Hue Step=42、Chroma Step=3、M&S Judge=ON。選んだ3色は、アクセント #C970E4（h2 の左線）、メイン #5293FF、サブ #BEC5FF（有効なタブの背景）。メインは白い文字を載せると読みにくい（明るさの比が約3.0で、目安の4.5に届かない）ため、同じ色相で明るさだけ下げた #336DCC を primary-dark とし、ボタン・リンク・有効なタブに使う（約5.0）。Tailwind の色名は primary / secondary / accent。main は HTML の main 要素と紛らわしいため使わない。状態を表す色（green・orange・gray）は3色に数えない。2026-11-01 追記 |
 | 15 | 灰色（gray）の扱い | 文字・枠線・背景に使っている灰色（gray）は、基本の3色に数えず、中立色としてそのまま残す。理由: 本文の文字（text-gray-800 が54件）は黒に近い灰色が読みやすく、基本の3色は見出しやボタンなど目立たせたい所に使うため。置き換えると約120箇所の変更になるので見送り（resources/views の件数）。2026-11-01 追記 |
 | 16 | npm の脆弱性対応 | `npm audit` の5件（critical 2・high 2・moderate 1）は、すべて開発用ツール（vite・concurrently・postcss 系）で、本番用だけで調べると0件。`--force` なしの `npm audit fix` で更新し、0件にした（変更は `package-lock.json` だけ。ビルドサイズはほぼ同じ）。npm 12 の不具合（npm/cli #9800）で、`--dry-run` と `--package-lock-only` は `EALLOWREMOTE` で失敗するため、通常の実行を使った。安全設定を弱める `--allow-remote=all` は使わない。2026-11-02 追記 |
+| 17 | 未使用パッケージの削除 | `@tailwindcss/vite`（Tailwind v4 用の Vite プラグイン）は、`vite.config.js` を含め、どのファイルからも使われていなかった。このプロジェクトは `tailwind.config.js` と PostCSS で動く Tailwind v3（3.4.19）なので、`npm uninstall` で削除した（変更は `package.json` と `package-lock.json` だけ）。v4 側の `tailwindcss`・`@tailwindcss/oxide`・`lightningcss` など14パッケージも一緒に消えた。`npm audit` は0件のまま、ビルドサイズは CSS 233.52 kB・JS 55.19 kB で変わらず、10画面で崩れなし。v4 への移行は作業量が大きいため見送り。2026-11-02 追記 |
 
 ## 4. 画面の扱い（24枚）
 
