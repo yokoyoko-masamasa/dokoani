@@ -11,3 +11,6 @@
 <meta property="og:title" content="{{ $fullTitle }}">
 <meta property="og:description" content="見たいアニメが、契約中のサブスクで今すぐ見られるかを検索できます。">
 <meta property="og:type" content="website">
+{{-- タブ用アイコン（png と ico） --}}
+<link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
+<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
