@@ -1,4 +1,6 @@
 <x-app-layout>
+    <x-slot:title>アカウントの削除（退会）</x-slot:title>
+
     <section class="px-4 md:px-6 py-8">
         {{-- 設定画面へ戻るリンク --}}
         <a href="{{ route('mypage.settings') }}" class="text-sm text-gray-800">← 設定に戻る</a>

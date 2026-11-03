@@ -1,4 +1,7 @@
 <x-app-layout>
+    {{-- タイトルは「検索語」の検索結果（空の検索語は到達しない） --}}
+    <x-slot:title>「{{ request()->string('q')->trim() }}」の検索結果</x-slot:title>
+
     <div class="px-4 md:px-6 py-8">
         {{-- 検索バー共通コンポーネントを読み込む --}}
         <x-search-bar />

@@ -1,4 +1,6 @@
 <x-app-layout>
+    <x-slot:title>契約状況</x-slot:title>
+
     <div class="px-4 md:px-6 py-8">
         {{-- 検索バー共通コンポーネントを読み込む --}}
         <x-search-bar />

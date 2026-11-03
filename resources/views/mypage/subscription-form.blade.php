@@ -1,4 +1,7 @@
 <x-app-layout>
+    {{-- 変更画面（$userSubscription あり）か追加画面かで画面名を分ける --}}
+    <x-slot:title>{{ isset($userSubscription) ? '料金を変更' : 'サブスクを追加' }}</x-slot:title>
+
     <section class="px-4 md:px-6 py-8">
         {{-- 設定画面へ戻るリンク --}}
         <a href="{{ route('mypage.settings') }}" class="text-sm text-gray-800">← 設定に戻る</a>
