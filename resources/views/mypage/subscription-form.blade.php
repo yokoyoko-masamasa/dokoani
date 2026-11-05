@@ -4,7 +4,7 @@
 
     <section class="px-4 md:px-6 py-8">
         {{-- 設定画面へ戻るリンク --}}
-        <a href="{{ route('mypage.settings') }}" class="text-sm text-gray-800">← 設定に戻る</a>
+        <a href="{{ route('mypage.settings') }}" class="inline-flex items-center min-h-6 text-sm text-gray-800">← 設定に戻る</a>
 
         <h1 class="mt-4 mb-2 text-2xl font-bold text-gray-800">{{ isset($userSubscription) ? '料金を変更' : 'サブスクを追加' }}</h1>
 
@@ -13,11 +13,11 @@
             <p class="text-gray-800">追加できるサービスがありません</p>
         @else
             @isset($userSubscription)
-                <p class="text-sm text-gray-800">月額料金だけ変更できます。サービスを変えるときは、削除して追加し直してください。</p>
+                <p class="text-base text-gray-800">月額料金だけ変更できます。サービスを変えるときは、削除して追加し直してください。</p>
             @else
-                <p class="text-sm text-gray-800">契約するサービスと月額料金を入力してください。</p>
+                <p class="text-base text-gray-800">契約するサービスと月額料金を入力してください。</p>
             @endisset
-            <p class="mt-2 text-sm text-gray-800">月額料金は1円以上の整数で入力してください（0円・小数点は入力できません）</p>
+            <p class="mt-2 text-base text-gray-800">月額料金は1円以上の整数で入力してください（0円・小数点は入力できません）</p>
 
             {{-- 追加フォームはPOSTで送る。@csrf は不正な送信を防ぐ合言葉 --}}
             {{-- 送信先は、変更なら更新、追加なら保存のルートにする --}}
@@ -57,7 +57,7 @@
                     <x-input-error :messages="$errors->get('price')" class="mt-2" />
                 </div>
 
-                <button type="submit" class="mt-6 block w-full px-3 py-2 rounded-md text-center text-sm bg-white text-gray-800 border border-gray-300">{{ isset($userSubscription) ? '変更する' : '追加する' }}</button>
+                <button type="submit" class="mt-6 block w-full min-h-11 px-3 py-2 rounded-md text-center text-sm bg-white text-gray-800 border border-gray-300">{{ isset($userSubscription) ? '変更する' : '追加する' }}</button>
             </form>
         @endif
     </section>

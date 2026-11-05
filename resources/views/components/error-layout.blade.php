@@ -30,7 +30,7 @@
                         <p class="mt-2 text-sm text-gray-800">{{ $message }}</p>
 
                         @if ($home)
-                            <a href="/" class="mt-6 block w-full px-3 py-2 rounded-md text-center text-sm bg-white text-gray-800 border border-gray-300">トップへ戻る</a>
+                            <a href="/" class="mt-6 flex items-center justify-center w-full min-h-11 px-3 py-2 rounded-md text-center text-sm bg-white text-gray-800 border border-gray-300">トップへ戻る</a>
                         @endif
                     </section>
                 </main>

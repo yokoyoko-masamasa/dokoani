@@ -28,7 +28,7 @@
                         <form method="POST" action="{{ route('list.destroy', $animeTitle) }}">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="inline-flex items-center gap-2 px-4 py-2 rounded-md text-sm {{ $wantClass }}">
+                            <button type="submit" class="inline-flex items-center gap-2 min-h-11 px-4 py-2 rounded-md text-sm {{ $wantClass }}">
                                 {{-- しおりのアイコン --}}
                                 <x-heroicon-o-bookmark class="w-5 h-5 shrink-0" aria-hidden="true" />
                                 見たい
@@ -39,7 +39,7 @@
                             @csrf
                             @method('PUT')
                             <input type="hidden" name="status" value="want">
-                            <button type="submit" class="inline-flex items-center gap-2 px-4 py-2 rounded-md text-sm {{ $wantClass }}">
+                            <button type="submit" class="inline-flex items-center gap-2 min-h-11 px-4 py-2 rounded-md text-sm {{ $wantClass }}">
                                 {{-- しおりのアイコン --}}
                                 <x-heroicon-o-bookmark class="w-5 h-5 shrink-0" aria-hidden="true" />
                                 見たい
@@ -52,7 +52,7 @@
                         <form method="POST" action="{{ route('list.destroy', $animeTitle) }}">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="inline-flex items-center gap-2 px-4 py-2 rounded-md text-sm {{ $watchedClass }}">
+                            <button type="submit" class="inline-flex items-center gap-2 min-h-11 px-4 py-2 rounded-md text-sm {{ $watchedClass }}">
                                 {{-- チェック丸のアイコン --}}
                                 <x-heroicon-o-check-circle class="w-5 h-5 shrink-0" aria-hidden="true" />
                                 視聴済み
@@ -63,7 +63,7 @@
                             @csrf
                             @method('PUT')
                             <input type="hidden" name="status" value="watched">
-                            <button type="submit" class="inline-flex items-center gap-2 px-4 py-2 rounded-md text-sm {{ $watchedClass }}">
+                            <button type="submit" class="inline-flex items-center gap-2 min-h-11 px-4 py-2 rounded-md text-sm {{ $watchedClass }}">
                                 {{-- チェック丸のアイコン --}}
                                 <x-heroicon-o-check-circle class="w-5 h-5 shrink-0" aria-hidden="true" />
                                 視聴済み
@@ -113,9 +113,9 @@
 
         {{-- あらすじが無い作品は文言で代用する --}}
         @if ($animeTitle->synopsis)
-            <p class="mt-2 text-sm text-gray-800">{{ $animeTitle->synopsis }}</p>
+            <p class="mt-2 text-base text-gray-800">{{ $animeTitle->synopsis }}</p>
         @else
-            <p class="mt-2 text-sm text-gray-500">あらすじ情報がありません</p>
+            <p class="mt-2 text-base text-gray-500">あらすじ情報がありません</p>
         @endif
     </section>
 </x-app-layout>
