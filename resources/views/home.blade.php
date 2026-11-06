@@ -1,5 +1,19 @@
 <x-app-layout>
-    <h1 class="px-4 md:px-6 py-8 text-2xl font-bold text-gray-800">ドコアニ</h1>
+    <section class="px-4 md:px-6 py-8">
+        <h1 class="text-2xl font-bold text-gray-800">そのアニメ、契約中のサブスクで見られる？</h1>
+
+        <p class="mt-2 max-w-2xl text-base text-gray-800">検索すると、配信中のサービスがわかります。契約中のサブスクを登録すると、見たいリストのうち見られる本数もわかります。</p>
+
+        {{-- 未ログインのときだけ、会員登録とログインのボタンを出す --}}
+        @guest
+            <div class="mt-6 flex gap-2">
+                {{-- 会員登録画面へ移る。主要ボタンなので塗りにする --}}
+                <a href="{{ route('register') }}" class="flex items-center justify-center min-h-11 px-4 py-2 rounded-md text-sm bg-primary-dark text-white border border-primary-dark">会員登録</a>
+                {{-- ログイン画面へ移る。副ボタンなので枠線にする --}}
+                <a href="{{ route('login') }}" class="flex items-center justify-center min-h-11 px-4 py-2 rounded-md text-sm bg-white text-gray-800 border border-gray-300">ログイン</a>
+            </div>
+        @endguest
+    </section>
 
     <div class="px-4 md:px-6 pb-8">
         {{-- 検索バー共通コンポーネントを読み込む --}}
