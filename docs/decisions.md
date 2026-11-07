@@ -1,6 +1,6 @@
 # MVP 決定事項
 
-決定日: 2026-09-20 ／ 最終追記: 2026-11-02
+決定日: 2026-09-20 ／ 最終追記: 2026-11-07
 方針: **MVP は必須機能（A の43件）に絞り、完成を優先する。**
 
 ## 1. 範囲
@@ -43,6 +43,7 @@
 | 15 | 灰色（gray）の扱い | 文字・枠線・背景に使っている灰色（gray）は、基本の3色に数えず、中立色としてそのまま残す。理由: 本文の文字（text-gray-800 が54件）は黒に近い灰色が読みやすく、基本の3色は見出しやボタンなど目立たせたい所に使うため。置き換えると約120箇所の変更になるので見送り（resources/views の件数）。2026-11-01 追記 |
 | 16 | npm の脆弱性対応 | `npm audit` の5件（critical 2・high 2・moderate 1）は、すべて開発用ツール（vite・concurrently・postcss 系）で、本番用だけで調べると0件。`--force` なしの `npm audit fix` で更新し、0件にした（変更は `package-lock.json` だけ。ビルドサイズはほぼ同じ）。npm 12 の不具合（npm/cli #9800）で、`--dry-run` と `--package-lock-only` は `EALLOWREMOTE` で失敗するため、通常の実行を使った。安全設定を弱める `--allow-remote=all` は使わない。2026-11-02 追記 |
 | 17 | 未使用パッケージの削除 | `@tailwindcss/vite`（Tailwind v4 用の Vite プラグイン）は、`vite.config.js` を含め、どのファイルからも使われていなかった。このプロジェクトは `tailwind.config.js` と PostCSS で動く Tailwind v3（3.4.19）なので、`npm uninstall` で削除した（変更は `package.json` と `package-lock.json` だけ）。v4 側の `tailwindcss`・`@tailwindcss/oxide`・`lightningcss` など14パッケージも一緒に消えた。`npm audit` は0件のまま、ビルドサイズは CSS 233.52 kB・JS 55.19 kB で変わらず、10画面で崩れなし。v4 への移行は作業量が大きいため見送り。2026-11-02 追記 |
+| 18 | ロゴ | ロゴは画像にせず、文字「ドコアニ」を Noto Sans JP 700（`font-bold`、決定12で配信済み）と Tailwind の色名 `primary-dark`（決定14）で作る。Blade の部品 `components/application-logo.blade.php` 1つにまとめ、ヘッダー・ゲスト画面・エラー画面の3か所で使う。リンクの高さは 44px 以上（`min-h-11`）。文字は単色にし、アクセント色は文字に使わない。理由: ヘッダー（白）とゲスト画面（`gray-100`）の両方で、`primary-dark` は 5.00 と 4.54（計算値）で、通常の文字の基準 4.5:1 を満たす。アクセント色は 3.03 と 2.76 で、ゲスト画面では 3:1 を下回る。文字サイズは今のまま（ヘッダーとエラー画面 18px、ゲスト画面 24px）。フッターの TMDB ロゴ（高さ 11.6px）より大きい。2026-11-07 追記 |
 
 ## 4. 画面の扱い（24枚）
 

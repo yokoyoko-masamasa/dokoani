@@ -18,7 +18,8 @@
             {{-- ロゴとカードを余った高さに入れ、フッターを最下部へ押し出す --}}
             <div class="w-full flex-1 flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
                 <div>
-                    <a href="{{ route('home') }}" class="text-2xl font-bold text-gray-800">ドコアニ</a>
+                    {{-- 文字ロゴの部品を読み込む（トップへのリンク） --}}
+                    <x-application-logo class="text-2xl" />
                 </div>
 
                 <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">

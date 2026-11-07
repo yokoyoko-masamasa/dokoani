@@ -19,7 +19,8 @@
             <div class="max-w-7xl mx-auto min-h-screen flex flex-col">
                 <header class="bg-white border-b border-gray-100">
                     <div class="flex items-center h-16 px-4 md:px-6">
-                        <a href="/" class="text-lg font-bold text-gray-800 whitespace-nowrap">ドコアニ</a>
+                        {{-- 文字ロゴの部品を読み込む（トップへのリンク） --}}
+                        <x-application-logo class="text-lg" />
                     </div>
                 </header>
 

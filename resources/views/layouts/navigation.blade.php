@@ -1,6 +1,7 @@
 <nav class="bg-white border-b border-gray-100">
     <div class="flex items-center justify-between h-16 px-4 md:px-6">
-        <a href="{{ route('home') }}" class="text-lg font-bold text-gray-800 whitespace-nowrap">ドコアニ</a>
+        {{-- 文字ロゴの部品を読み込む（トップへのリンク） --}}
+        <x-application-logo class="text-lg" />
 
         <div class="flex items-center gap-4 text-sm whitespace-nowrap">
             {{-- ログイン中かどうかで、右側のリンクを切り替える --}}
