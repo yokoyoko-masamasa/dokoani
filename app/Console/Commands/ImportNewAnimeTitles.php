@@ -28,6 +28,8 @@ class ImportNewAnimeTitles extends Command
         $imageBaseUrl = config('services.tmdb.image_base_url');
         $token = config('services.tmdb.api_token');
         $aliases = config('services.tmdb.provider_aliases');
+        // 除外する番号を数値にそろえる（文字で書いても一致させる）
+        $excludedIds = array_map('intval', config('services.tmdb.excluded_tmdb_ids', []));
 
         for ($page = 1; $page <= $pages; $page++) {
             // discover/tvを1ページ分取得（失敗したら次のページへ）
@@ -56,6 +58,11 @@ class ImportNewAnimeTitles extends Command
             $items = $response->json('results', []);
 
             foreach ($items as $item) {
+                // 除外する作品は取り込まない（watch/providers も呼ばない）
+                if (in_array((int) $item['id'], $excludedIds, true)) {
+                    continue;
+                }
+
                 // すでに登録済みの作品はスキップ（重複取り込み防止）
                 if (AnimeTitle::where('tmdb_id', $item['id'])->exists()) {
                     continue;

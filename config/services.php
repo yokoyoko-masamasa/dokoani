@@ -43,6 +43,17 @@ return [
             10 => 9,      // Amazon Video → Amazon Prime Video
             1796 => 8,    // Netflix Standard with Ads → Netflix
         ],
+        // 取り込まない作品の tmdb_id。空なら全件を取り込む
+        'excluded_tmdb_ids' => [
+            241002,
+            78501,
+            88090,
+            233643,
+            207840,
+            38112,
+            254174,
+            334779,
+        ],
     ],
 
 ];
