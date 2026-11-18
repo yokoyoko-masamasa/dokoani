@@ -5,9 +5,9 @@ namespace App\Console\Commands;
 use App\Models\AnimeAvailability;
 use App\Models\AnimeTitle;
 use App\Models\StreamingService;
+use App\Services\TmdbClient;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Throwable;
 
@@ -21,12 +21,10 @@ class ImportNewAnimeTitles extends Command
     // DBに保存する配信区分（この5種以外はログのみ）
     private const KNOWN_STATUSES = ['flatrate', 'free', 'ads', 'rent', 'buy'];
 
-    public function handle(): int
+    public function handle(TmdbClient $tmdb): int
     {
         $pages = (int) $this->option('pages');
-        $baseUrl = config('services.tmdb.base_url');
         $imageBaseUrl = config('services.tmdb.image_base_url');
-        $token = config('services.tmdb.api_token');
         $aliases = config('services.tmdb.provider_aliases');
         // 除外する番号を数値にそろえる（文字で書いても一致させる）
         $excludedIds = array_map('intval', config('services.tmdb.excluded_tmdb_ids', []));
@@ -34,18 +32,7 @@ class ImportNewAnimeTitles extends Command
         for ($page = 1; $page <= $pages; $page++) {
             // discover/tvを1ページ分取得（失敗したら次のページへ）
             try {
-                $response = Http::withToken($token)
-                    ->timeout(10)
-                    ->get("{$baseUrl}/discover/tv", [
-                        'with_genres' => 16,
-                        'with_origin_country' => 'JP',
-                        'sort_by' => 'popularity.desc',
-                        'language' => 'ja-JP',
-                        'page' => $page,
-                    ])
-                    ->throw();
-
-                usleep(30_000); // レート制限順守のための待機（F52）
+                $response = $tmdb->discoverAnime($page);
             } catch (Throwable $e) {
                 Log::warning('discover取得に失敗', [
                     'page' => $page,
@@ -70,7 +57,7 @@ class ImportNewAnimeTitles extends Command
 
                 // 取得とDB保存をまとめて1単位として扱う（F50）
                 try {
-                    $this->importOneTitle($item, $baseUrl, $imageBaseUrl, $token, $aliases);
+                    $this->importOneTitle($item, $tmdb, $imageBaseUrl, $aliases);
                 } catch (Throwable $e) {
                     Log::warning('作品の取り込みに失敗', [
                         'tmdb_id' => $item['id'],
@@ -90,18 +77,12 @@ class ImportNewAnimeTitles extends Command
      */
     private function importOneTitle(
         array $item,
-        string $baseUrl,
+        TmdbClient $tmdb,
         string $imageBaseUrl,
-        string $token,
         array $aliases,
     ): void {
         // 配信情報を取得（ここで失敗したら作品ごとスキップ）
-        $response = Http::withToken($token)
-            ->timeout(10)
-            ->get("{$baseUrl}/tv/{$item['id']}/watch/providers")
-            ->throw();
-
-        usleep(30_000); // レート制限順守のための待機（F52）
+        $response = $tmdb->watchProviders($item['id']);
 
         // JPが無い・空でも「配信0件」として扱う（失敗ではない）
         $jp = $response->json('results.JP', []);
