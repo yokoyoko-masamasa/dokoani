@@ -1,0 +1,83 @@
+# push と pull request で、テストと整形チェックを自動で実行する
+name: CI
+
+on:
+  # main への push で動かす
+  push:
+    branches: [main]
+  # main へ向けた pull request で動かす
+  pull_request:
+    branches: [main]
+
+# コードの読み取りだけを許可する（いちばん小さい権限）
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    # 途中で止まったときに待ち続けないよう、15分で打ち切る
+    timeout-minutes: 15
+
+    # テスト用の PostgreSQL を一時的に起動する（ローカルと同じ 18）
+    services:
+      pgsql:
+        image: postgres:18-alpine
+        # CI の中だけで使い捨てる DB なので、秘密情報ではない
+        env:
+          POSTGRES_DB: testing
+          POSTGRES_USER: sail
+          POSTGRES_PASSWORD: password
+        ports:
+          - 5432:5432
+        # DB が接続を受け付けるまで、手順の開始を待たせる
+        options: >-
+          --health-cmd "pg_isready -U sail -d testing"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+
+    # .env より優先される。.env.example を変えずに DB だけ差し替える
+    # MAIL_MAILER などは書かない（phpunit.xml の値を効かせるため）
+    env:
+      DB_CONNECTION: pgsql
+      DB_HOST: 127.0.0.1
+      DB_PORT: 5432
+      DB_DATABASE: testing
+      DB_USERNAME: sail
+      DB_PASSWORD: password
+      # TMDB の取得先 URL。公開の値で秘密情報ではない（空だと Http::fake に届く前に例外になる）
+      TMDB_BASE_URL: https://api.themoviedb.org/3
+
+    steps:
+      # リポジトリのコードを取り出す
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      # ローカルの Sail と同じ PHP 8.5 と、PostgreSQL 用の拡張を入れる
+      - uses: shivammathur/setup-php@eb7c497e18156a6bbabfef1d3a82760b9eda3962 # 2.40.0
+        with:
+          php-version: '8.5'
+          extensions: pdo_pgsql
+          coverage: none
+
+      # composer.lock どおりに PHP のパッケージを入れる（pint 用に dev も入れる）
+      - run: composer install --no-interaction --prefer-dist --no-progress
+
+      # ランナーの Node の版を記録する（Vite は 20.19 以上か 22.12 以上が必要）
+      - run: node -v
+
+      # package-lock.json どおりに JS のパッケージを入れる
+      - run: npm ci
+
+      # 画面の @vite が読む CSS と JS を作る
+      - run: npm run build
+
+      # .env を用意し、暗号化に使う鍵（APP_KEY）を作る
+      - run: cp .env.example .env
+      - run: php artisan key:generate
+
+      # テストを実行する（DB は上の PostgreSQL を使う）
+      - run: php artisan test
+
+      # 整形のずれだけを調べる（ファイルは書き換えない）
+      - run: vendor/bin/pint --test
