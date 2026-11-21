@@ -15,3 +15,12 @@ Schedule::command('tmdb:import-new')
     ->dailyAt('04:00')
     ->timezone('Asia/Tokyo')
     ->withoutOverlapping();
+
+// 既存作品の配信情報を取り直すバッチ（F48）
+// 毎週月曜03:00（日本時間）に自動実行する
+// withoutOverlapping() が防ぐのは同じコマンド同士の二重起動だけ
+Schedule::command('tmdb:update-availabilities')
+    ->mondays()
+    ->at('03:00')
+    ->timezone('Asia/Tokyo')
+    ->withoutOverlapping();
