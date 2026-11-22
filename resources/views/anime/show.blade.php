@@ -117,5 +117,11 @@
         @else
             <p class="mt-2 text-base text-gray-500">あらすじ情報がありません</p>
         @endif
+
+        {{-- 日時は UTC で保存。表示のときだけ日本時間の日付に変える --}}
+        {{-- 列は NULL 不可だが、値が無いときは段落ごと出さない --}}
+        @if ($animeTitle->last_synced_at)
+            <p class="mt-6 text-sm text-gray-600">最終更新日：{{ \Illuminate\Support\Carbon::parse($animeTitle->last_synced_at)->timezone('Asia/Tokyo')->format('Y/m/d') }}（配信情報の同期には最大1週間程度の遅延があります）</p>
+        @endif
     </section>
 </x-app-layout>
