@@ -54,7 +54,14 @@ if (input && list) {
         // 入力が止まってから通信する（連打時の無駄な通信と、古い応答による表示の上書きを防ぐ）
         debounceTimer = setTimeout(() => {
             fetch(`${suggestUrl}?q=${encodeURIComponent(q)}`)
-                .then((response) => response.json())
+                .then((response) => {
+                    // 回数制限（429）などで失敗したら、候補を出さずに閉じる
+                    if (!response.ok) {
+                        return [];
+                    }
+
+                    return response.json();
+                })
                 .then(renderList)
                 .catch(closeList);
         }, 250);

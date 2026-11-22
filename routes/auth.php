@@ -11,7 +11,9 @@ Route::middleware('guest')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])
         ->name('register');
 
-    Route::post('register', [RegisteredUserController::class, 'store']);
+    // 会員登録の送信は1分に6回まで。確認メールの大量送信を防ぐ
+    Route::post('register', [RegisteredUserController::class, 'store'])
+        ->middleware('throttle:6,1,register');
 
     Route::get('login', [AuthenticatedSessionController::class, 'create'])
         ->name('login');

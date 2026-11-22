@@ -19,7 +19,8 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/search', [SearchController::class, 'index'])->name('search.index');
 
 // 検索候補。JSONで最大5件返す。読み取りのみなのでCSRFトークン不要
-Route::get('/search/suggest', [SearchController::class, 'suggest'])->name('search.suggest');
+// 1分に60回まで。suggest を付けて他のルートと回数を分ける
+Route::get('/search/suggest', [SearchController::class, 'suggest'])->name('search.suggest')->middleware('throttle:60,1,suggest');
 
 // アニメ詳細画面（仮表示）
 Route::get('/anime/{animeTitle}', [AnimeTitleController::class, 'show'])->name('anime.show');
