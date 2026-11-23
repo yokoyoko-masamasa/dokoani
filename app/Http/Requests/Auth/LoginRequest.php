@@ -43,7 +43,14 @@ class LoginRequest extends FormRequest
         $this->ensureIsNotRateLimited();
 
         if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
-            RateLimiter::hit($this->throttleKey());
+            // 失敗を数える。数える期間は最初の失敗から15分
+            $failures = RateLimiter::hit($this->throttleKey(), 15 * 60);
+
+            // 5回目の失敗で15分ロックし、回数は0から数え直す
+            if ($failures >= 5) {
+                RateLimiter::hit($this->lockoutKey(), 15 * 60);
+                RateLimiter::clear($this->throttleKey());
+            }
 
             throw ValidationException::withMessages([
                 'email' => trans('auth.failed'),
@@ -60,13 +67,16 @@ class LoginRequest extends FormRequest
      */
     public function ensureIsNotRateLimited(): void
     {
-        if (! RateLimiter::tooManyAttempts($this->throttleKey(), 5)) {
+        // ロック中なら、パスワードを確かめる前に断る
+        // ロック専用キーは1回分あれば「ロック中」
+        if (! RateLimiter::tooManyAttempts($this->lockoutKey(), 1)) {
             return;
         }
 
         event(new Lockout($this));
 
-        $seconds = RateLimiter::availableIn($this->throttleKey());
+        // ロックが解けるまでの秒数（メッセージでは分に切り上げる）
+        $seconds = RateLimiter::availableIn($this->lockoutKey());
 
         throw ValidationException::withMessages([
             'email' => trans('auth.throttle', [
@@ -82,5 +92,13 @@ class LoginRequest extends FormRequest
     public function throttleKey(): string
     {
         return Str::transliterate(Str::lower($this->string('email')).'|'.$this->ip());
+    }
+
+    /**
+     * ロックの印に使うキー。失敗を数えるキーとは分ける
+     */
+    public function lockoutKey(): string
+    {
+        return 'login-lockout|'.$this->throttleKey();
     }
 }
