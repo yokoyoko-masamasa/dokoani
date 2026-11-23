@@ -27,6 +27,7 @@ return [
         'q' => '検索キーワード',
         'email' => 'メールアドレス',
         'password' => 'パスワード',
+        'current_password' => '現在のパスワード',
         'password_confirmation' => 'パスワード（確認）',
         'name' => '名前',
     ],

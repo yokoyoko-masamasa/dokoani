@@ -41,7 +41,7 @@
 
         <x-section-heading class="mt-8 mb-4">アカウント設定</x-section-heading>
 
-        {{-- 退会の入口。Breeze 標準のアカウント画面へ移動する --}}
-        <a href="{{ route('profile.edit') }}" class="inline-flex items-center min-h-6 text-sm text-gray-800 underline">退会する</a>
+        {{-- パスワード変更と退会の入口。アカウント設定画面へ移動する --}}
+        <a href="{{ route('profile.edit') }}" class="inline-flex items-center min-h-6 text-sm text-gray-800 underline">パスワード変更・退会の手続き</a>
     </section>
 </x-app-layout>

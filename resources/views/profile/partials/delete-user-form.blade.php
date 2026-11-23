@@ -1,5 +1,6 @@
 <div>
-    <h1 class="mt-4 mb-2 text-2xl font-bold text-gray-800">アカウントの削除（退会）</h1>
+    {{-- 左線つきの見出し部品を読み込む --}}
+    <x-section-heading class="mb-2">退会</x-section-heading>
 
     <p class="text-base text-gray-800">退会すると、以下のデータがすべて削除され、元に戻すことはできません。</p>
 
