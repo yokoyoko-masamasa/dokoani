@@ -35,6 +35,13 @@
         </div>
 
         <div class="flex items-center justify-end mt-4">
+            {{-- 再設定のルートがあるときだけリンクを出す --}}
+            @if (Route::has('password.request'))
+                <a class="inline-flex items-center min-h-6 underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary" href="{{ route('password.request') }}">
+                    {{ __('Forgot your password?') }}
+                </a>
+            @endif
+
             <x-primary-button class="ms-3">
                 {{-- ログインのアイコン。ヘッダーのログインと同じ絵 --}}
                 <x-heroicon-o-arrow-right-end-on-rectangle class="w-4 h-4 shrink-0" aria-hidden="true" />
