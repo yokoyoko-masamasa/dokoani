@@ -29,7 +29,7 @@ class AvailabilitySaver
 
                 $service = StreamingService::firstWhere('tmdb_provider_id', $providerId);
 
-                // 対象4社に無いproviderは無視する
+                // 対象6社に無いproviderは無視する
                 if (! $service) {
                     continue;
                 }

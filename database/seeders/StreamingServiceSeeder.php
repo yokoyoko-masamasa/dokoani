@@ -8,7 +8,7 @@ use Illuminate\Database\Seeder;
 class StreamingServiceSeeder extends Seeder
 {
     /**
-     * 対応する4社の配信サービスを登録する。
+     * 対応する6社の配信サービスを登録する。
      */
     public function run(): void
     {
@@ -38,6 +38,18 @@ class StreamingServiceSeeder extends Seeder
                 'tmdb_provider_id' => 84,
                 'logo_image_url' => $logoBase.'/3DGpCh83CR9lDzyKbNWlmUBexBF.png',
                 'service_url' => 'https://video.unext.jp/',
+            ],
+            [
+                'name' => 'Hulu',
+                'tmdb_provider_id' => 15,
+                'logo_image_url' => $logoBase.'/44uAnmSqvA4yBOdbPWN8YgQHjWm.png',
+                'service_url' => 'https://www.hulu.jp/',
+            ],
+            [
+                'name' => 'FOD',
+                'tmdb_provider_id' => 2683,
+                'logo_image_url' => $logoBase.'/m0tkTiV5TN7NWfazDEYc8NoVXSd.png',
+                'service_url' => 'https://fod.fujitv.co.jp/',
             ],
         ];
 
