@@ -16,19 +16,22 @@
                 <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
             @endif
 
-            {{-- クリックでアニメ詳細画面（anime.show）へ遷移する --}}
-            <a href="{{ route('anime.show', ['animeTitle' => $anime]) }}" class="block">
-                {{-- ポスター画像が無い作品は、灰色の枠で代用する --}}
-                @if ($anime->poster_image_url)
-                    <img src="{{ $anime->poster_image_url }}" alt="{{ $anime->title }}" class="w-full aspect-[2/3] object-cover rounded-md bg-gray-200">
-                @else
-                    <div class="w-full aspect-[2/3] rounded-md bg-gray-200"></div>
-                @endif
-                <p class="mt-2 text-sm text-gray-800">{{ $anime->title }}</p>
+            {{-- ロゴもリンクにするため、カード全体は <a> にしない --}}
+            <div>
+                {{-- クリックでアニメ詳細画面（anime.show）へ遷移する --}}
+                <a href="{{ route('anime.show', ['animeTitle' => $anime]) }}" class="block">
+                    {{-- ポスター画像が無い作品は、灰色の枠で代用する --}}
+                    @if ($anime->poster_image_url)
+                        <img src="{{ $anime->poster_image_url }}" alt="{{ $anime->title }}" class="w-full aspect-[2/3] object-cover rounded-md bg-gray-200">
+                    @else
+                        <div class="w-full aspect-[2/3] rounded-md bg-gray-200"></div>
+                    @endif
+                    <p class="mt-2 text-sm text-gray-800">{{ $anime->title }}</p>
+                </a>
 
                 {{-- 配信ロゴ共通コンポーネントを読み込む --}}
-                <x-availability-logos :anime="$anime" />
-            </a>
+                <x-availability-logos :anime="$anime" :linked="true" />
+            </div>
 
             @if ($loop->last)
                 </div>
